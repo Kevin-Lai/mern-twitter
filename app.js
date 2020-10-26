@@ -10,10 +10,15 @@ const tweets = require("./routes/api/tweets");
 const User = require("./models/User");
 const bodyParser = require('body-parser');
 
+const passport = require('passport');
+
 mongoose
     .connect(db, { useNewUrlParser: true } )
-    .then(() => console.log("connected to mongoDB"))
+    .then(() => console.log("##### Connected to mongoDB #####"))
     .catch(err => console.log(err));
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 app.use(bodyParser.urlencoded({
     extended: false
